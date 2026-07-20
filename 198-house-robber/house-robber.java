@@ -14,37 +14,32 @@
 //         return Math.max(take, notTake);
 //     }
 // }
+import java.util.Arrays;
+
 class Solution {
 
-    Integer[][] dp;
-
     public int rob(int[] nums) {
+        int[] dp = new int[nums.length];
+        Arrays.fill(dp, -1);
 
-        int total = 0;
-        for (int num : nums) {
-            total += num;
-        }
-
-        dp = new Integer[nums.length + 1][total + 1];
-
-        return solve(nums, 0, 0);
+        return solve(nums, 0, dp);
     }
 
-    public int solve(int[] nums, int idx, int sum) {
+    public int solve(int[] nums, int idx, int[] dp) {
 
         if (idx >= nums.length) {
-            return sum;
+            return 0;
         }
 
-        if (dp[idx][sum] != null) {
-            return dp[idx][sum];
+        if (dp[idx] != -1) {
+            return dp[idx];
         }
 
-        int take = solve(nums, idx + 2, sum + nums[idx]);
-        int notTake = solve(nums, idx + 1, sum);
+        int take = nums[idx] + solve(nums, idx + 2, dp);
+        int notTake = solve(nums, idx + 1, dp);
 
-        dp[idx][sum] = Math.max(take, notTake);
+        dp[idx] = Math.max(take, notTake);
 
-        return dp[idx][sum];
+        return dp[idx];
     }
 }
