@@ -5,14 +5,11 @@ class Solution {
         return ans;
     }
     public void solve(int[] nums, int index, List<Integer>temp){
-        if(index == nums.length){
-            ans.add(new ArrayList<>(temp));
-            return;
+        ans.add(new ArrayList<>(temp));
+        for(int i  = index; i<nums.length;i++){
+            temp.add(nums[i]);
+            solve(nums,i+1,temp);
+            temp.remove(temp.size()-1);
         }
-        temp.add(nums[index]);
-        solve(nums,index+1,temp);
-        temp.remove(temp.size()-1);
-
-        solve(nums,index+1, temp);
     }
 }
