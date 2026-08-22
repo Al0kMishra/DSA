@@ -17,6 +17,6 @@ class Solution {
             return original % sum == 0;
         }
 
-        return original % (sum + product)== 0; //  original % product == 0;
+        return original % (sum + product)== 0;
     }
 }
